@@ -45,9 +45,6 @@ public class SkillgroupService {
 		return new Gson().toJson(group);
 	}
 
-//TODO Add the list() method to the DAO to make this work
-// don't need the @Path here as this will go to the root - /Skillgroup
-//
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public String getSkills() {
