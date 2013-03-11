@@ -1,0 +1,21 @@
+<project name="SkillsInventory" default="deploy" basedir=".">
+    <description>
+        Build/Deployment tasks for Skills Inventory
+    </description>
+	 <!-- set global properties for this build -->
+	  <property environment="env"/>
+	  <property name="src" location="src/main/java"/>
+	  <property name="build" location="build"/>
+	  <property name="war" value="skills"/>
+	  <property name="version" value="1.0.0-BUILD-SNAPSHOT"/>
+	  <property name="dist"  location="target"/>
+	  <property name="tomcat-webapps" location="${env.CATALINA_HOME}/webapps"/>	
+
+	  <target name="deploy"> <!--  depends="un-deploy" -->
+	    <tstamp/>
+	    <copy file="${dist}/${war}-${version}.war" tofile="${tomcat-webapps}/${war}.war"/>
+	  </target>	
+	 <target name="un-deploy" description="clean up deployment" >
+	    <delete file="${tomcat-webapps}/${war}.war"/>
+	  </target>
+</project>
