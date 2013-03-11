@@ -1,30 +1,34 @@
 package com.solutiondesign.skills;
 
+import java.util.List;
+
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import com.google.gson.Gson;
 import com.solutiondesign.skills.dao.SkillgroupDAO;
 import com.solutiondesign.skills.dao.TestDAO;
 import com.solutiondesign.skills.domain.Skillgroup;
+//import org.springframework.context.annotation.Scope;
 
 //@Scope("request")
 @Component
-@Path("/Service")
-public class Service {
+@Path("/Skillgroup")
+public class SkillgroupService {
 	
 	@Autowired
 	private SkillgroupDAO skillgroupDAO;
 	
 	@GET
 	@Produces(MediaType.TEXT_HTML)
-	public String getList() {
+	public String getaList() {
+		//TODO Make this usable, or get rid of it
 		String s = new TestDAO().doTest();
 //		Skillgroup group = new SkillgroupDAO().findById(1);
 //		return "<html> " + "<title>" + "Hello Neal" + "</title>"
@@ -35,10 +39,19 @@ public class Service {
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public String getPerson() {
-		Skillgroup group = skillgroupDAO.findById(1);
+	@Path("/{id}")
+	public String getSkill(@PathParam("id") int id) {
+		Skillgroup group = skillgroupDAO.findById(id);
 		return new Gson().toJson(group);
 	}
-	
-	
+
+//TODO Add the list() method to the DAO to make this work
+// don't need the @Path here as this will go to the root - /Skillgroup
+//
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public String getSkills() {
+		List<Skillgroup> groups = skillgroupDAO.list();
+		return new Gson().toJson(groups);
+	}	
 }

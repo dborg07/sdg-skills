@@ -22,14 +22,15 @@ public class TestClient {
 	    Client client = Client.create(config);
 	    WebResource service = client.resource(getBaseURI());
 	    // Get JSON
-	    String response = service.path("Service").accept(MediaType.APPLICATION_JSON).get(String.class);
+	    String response = service.path("Skillgroup/3").accept(MediaType.APPLICATION_JSON).get(String.class);
 	    System.out.println(response);
 	    Skillgroup agroup = new Gson().fromJson(response, Skillgroup.class);
 	    // The HTML
 	    if(agroup == null) {
 	    	System.out.println("### Oops! agroup was null!");
 	    }
-	    System.out.println(service.path("Service").accept(MediaType.TEXT_HTML).get(String.class));
+	    System.out.println(service.path("Skillgroup").accept(MediaType.APPLICATION_JSON).get(String.class));
+	    System.out.println(service.path("Skillgroup").accept(MediaType.TEXT_HTML).get(String.class));
 
 	  }
 

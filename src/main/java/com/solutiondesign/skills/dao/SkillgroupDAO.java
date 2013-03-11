@@ -2,8 +2,11 @@ package com.solutiondesign.skills.dao;
 
 // Generated Feb 28, 2013 11:04:59 AM by Hibernate Tools 3.4.0.CR1
 
+import java.util.List;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -46,6 +49,19 @@ public class SkillgroupDAO extends BaseDAO {
 				log.debug("get successful, instance found");
 			}
 			return instance;
+		} catch (RuntimeException re) {
+			log.error("get failed", re);
+			throw re;
+		}
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Transactional
+	public List<Skillgroup> list() {
+		log.debug("Getting Skillgroup list");
+		try {
+			Query q = sessionFactory.getCurrentSession().createQuery("from Skillgroup");
+			return (List<Skillgroup>) q.list();
 		} catch (RuntimeException re) {
 			log.error("get failed", re);
 			throw re;

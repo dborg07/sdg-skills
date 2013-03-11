@@ -42,7 +42,7 @@
 	<bean id="skillgroupDAO" class="com.solutiondesign.skills.dao.SkillgroupDAO">
 		<property name="sessionFactory" ref="sessionFactory"/>
 	</bean>
-	<bean id="skillsService" class="com.solutiondesign.skills.Service">
+	<bean id="skillsService" class="com.solutiondesign.skills.SkillgroupService">
 	</bean>	
     <bean id="transactionManager"
         class="org.springframework.orm.hibernate3.HibernateTransactionManager">
